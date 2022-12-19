@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/pixel.png" type="Texture" id=1]
+[ext_resource path="res://general_purpose/transitions/fadelayer.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform int type = 9;
+uniform float r = 1.0;
+
+void fragment()
+{
+    if( type == 0 )
+    {
+        COLOR = vec4( 1.0, 1.0, 1.0, step( UV.x, r ) );
+    }
+    else if( type == 1 )
+    {
+        COLOR = vec4( 1.0, 1.0, 1.0, step( UV.y, r ) );
+    }
+    else if( type == 2 )
+    {
+        COLOR = vec4( 1.0, 1.0, 1.0, step( 1.0 - r, abs( UV.x - 0.5 ) ) );
+    }
+    else if( type == 3 )
+    {
+        COLOR = vec4( 1.0, 1.0, 1.0, step( 1.0 - r, abs( UV.y - 0.5 ) ) );
+    }
+    else if( type == 4 )
+    {
+        float d = length( UV * vec2( 1.77778, 1.0 ) - vec2( 0.88889, 0.5 ) );
+        COLOR = vec4( 1.0, 1.0, 1.0, step( r, d ) );
+    }
+    else if( type == 5 )
+    {
+        COLOR = vec4( 1.0, 1.0, 1.0, step( mod( UV.x * 20.0, 1.0 ) + UV.x, r * 2.0 ) );
+    }
+    else if( type == 6 )
+    {
+        COLOR = vec4( 1.0, 1.0, 1.0, step( mod( ( UV.x + UV.y * 0.5625 ) * 10.0, 1.0 ) + UV.y + UV.x, r * 3.0 ) );
+    }
+    else if( type == 7 )
+    {
+        vec2 uv = mod( UV * vec2( 1.77778, 1.0 ) * 10.0, 1.0 );
+        float d = length( uv - vec2( 0.5, 0.5 ) );
+        COLOR = vec4( 1.0, 1.0, 1.0, step( 1.0 - r, d ) );
+    }
+    else if( type == 8 )
+    {
+        COLOR = vec4( 1.0, 1.0, 1.0, step( 1.0 - r, abs( UV.x + abs( UV.y - 0.5 ) - 0.75 ) ) );
+    }
+    else if( type == 9 )
+    {
+        vec2 uv = UV - vec2( 0.5 );
+        float a = atan( uv.x / uv.y );
+        COLOR = vec4( 1.0, 1.0, 1.0, step( 1.0 - r, mod( a * 3.1415, 1.0 ) ) );
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/type = 7
+shader_param/r = 0.0
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("fade:material:shader_param/r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fadein"
+length = 0.25
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("fade:material:shader_param/r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "fadeout"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("fade:material:shader_param/r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="fadelayer" type="CanvasLayer"]
+pause_mode = 2
+layer = 128
+script = ExtResource( 2 )
+
+[node name="fade" type="Sprite" parent="."]
+modulate = Color( 0.00784314, 0.0901961, 0.129412, 1 )
+material = SubResource( 2 )
+scale = Vector2( 320, 180 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="anim" type="AnimationPlayer" parent="."]
+playback_speed = 0.5
+anims/RESET = SubResource( 3 )
+anims/fadein = SubResource( 4 )
+anims/fadeout = SubResource( 5 )
+
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

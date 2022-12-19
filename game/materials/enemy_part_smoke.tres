@@ -1,0 +1,59 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type particles;
+
+uniform vec4 color_1 : hint_color = vec4( 1.0 );
+uniform vec4 color_2 : hint_color = vec4( 1.0 );
+
+
+float rand_from_seed(inout uint seed) {
+	int k;
+	int s = int(seed);
+	if (s == 0)
+	s = 305420679;
+	k = s / 127773;
+	s = 16807 * (s - k * 127773) - 2836 * k;
+	if (s < 0)
+		s += 2147483647;
+	seed = uint(s);
+	return float(seed % uint(65536)) / 65535.0;
+}
+
+
+uint hash(uint x) {
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = (x >> uint(16)) ^ x;
+	return x;
+}
+
+void vertex() {
+	uint base_number = NUMBER;
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	
+	if( RESTART )
+	{
+		TRANSFORM = EMISSION_TRANSFORM;
+		TRANSFORM[3].xy += ( vec2( rand_from_seed( alt_seed ), rand_from_seed( alt_seed ) ) - vec2( 0.5 ) ) * 4.0;
+		float scale = 3.0 + rand_from_seed( alt_seed );
+		TRANSFORM[0].x = scale;
+		TRANSFORM[1].y = scale;
+		if( rand_from_seed( alt_seed ) > 0.5 )
+		{
+			COLOR = color_1
+		}
+		else
+		{
+			COLOR = color_2
+		}
+	}
+	else
+	{
+		VELOCITY.y -= DELTA * 15.0;
+		TRANSFORM[0].x *= 0.95;
+		TRANSFORM[1].y *= 0.95;
+	}
+}
+
+"

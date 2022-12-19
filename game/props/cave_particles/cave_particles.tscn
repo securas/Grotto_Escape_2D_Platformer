@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/bg_particle.png" type="Texture" id=1]
+[ext_resource path="res://props/cave_particles/cave_particles.gd" type="Script" id=2]
+[ext_resource path="res://materials/cave_particles.material" type="Material" id=3]
+
+[node name="cave_particles" type="Particles2D"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+z_index = 5
+amount = 40
+lifetime = 30.0
+preprocess = 60.0
+speed_scale = 0.7
+visibility_rect = Rect2( -640, -200, 640, 400 )
+process_material = ExtResource( 3 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="back_particles" type="Particles2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.294118 )
+z_index = -10
+amount = 40
+lifetime = 30.0
+preprocess = 60.0
+speed_scale = 0.7
+visibility_rect = Rect2( -640, -200, 640, 400 )
+process_material = ExtResource( 3 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_editor_description_": ""
+}

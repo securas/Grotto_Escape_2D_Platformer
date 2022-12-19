@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://actors/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://general_purpose/transitions/fadelayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://world/map_room.gd" type="Script" id=3]
+[ext_resource path="res://world/world_elements/walls.gd" type="Script" id=4]
+[ext_resource path="res://ldtk/grotto.ldtk" type="PackedDataContainer" id=5]
+[ext_resource path="res://assets/main_tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://general_purpose/camera/linked_camera.gd" type="Script" id=7]
+[ext_resource path="res://world/world_elements/back_decoration.gd" type="Script" id=8]
+[ext_resource path="res://world/world_elements/background.gd" type="Script" id=9]
+[ext_resource path="res://assets/background_tileset.tres" type="TileSet" id=10]
+[ext_resource path="res://hud/hudlayer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://world/world_elements/hazards.gd" type="Script" id=12]
+[ext_resource path="res://general_purpose/effects/flash_tween.tscn" type="PackedScene" id=13]
+[ext_resource path="res://world/world_elements/water_lava.gd" type="Script" id=14]
+[ext_resource path="res://materials/water_lava.material" type="Material" id=15]
+
+[node name="map_room" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+_LDtk_World = ExtResource( 5 )
+_player_detection_mask = 16
+
+[node name="fadelayer" parent="." instance=ExtResource( 2 )]
+
+[node name="background" type="TileMap" parent="."]
+light_mask = 2
+z_index = -10
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 16, 16 )
+format = 1
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+layers = [ "background" ]
+
+[node name="flash_tween" parent="background" instance=ExtResource( 13 )]
+
+[node name="back_decoration" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+layers = [ "back_decoration" ]
+
+[node name="enemies" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="pickups" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+
+[node name="camera" type="Camera2D" parent="player"]
+current = true
+process_mode = 0
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 4.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="water_lava" type="TileMap" parent="."]
+material = ExtResource( 15 )
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+cell_y_sort = true
+collision_use_kinematic = true
+format = 1
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+layers = [ "water_lava" ]
+
+[node name="walls" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+cell_y_sort = true
+collision_use_kinematic = true
+format = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+layers = [ "walls" ]
+
+[node name="hazards" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+cell_y_sort = true
+collision_use_kinematic = true
+format = 1
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+layers = [ "hazards" ]
+
+[node name="hudlayer" parent="." instance=ExtResource( 11 )]

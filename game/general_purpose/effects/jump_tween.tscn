@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://general_purpose/effects/jump_tween.gd" type="Script" id=1]
+
+[node name="jump_tween" type="Tween"]
+repeat = true
+playback/repeat = true
+script = ExtResource( 1 )
