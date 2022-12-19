@@ -52,12 +52,12 @@ __meta__ = {
 }
 layers = [ "back_decoration" ]
 
-[node name="enemies" type="Node2D" parent="."]
+[node name="pickups" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="pickups" type="Node2D" parent="."]
+[node name="enemies" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }

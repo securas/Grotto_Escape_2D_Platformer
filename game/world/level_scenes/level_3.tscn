@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://world/map_room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ldtk/grotto/level_3.ldtkl" type="PackedDataContainer" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://props/god_ray/god_ray_thin.tscn" type="PackedScene" id=5]
 [ext_resource path="res://props/cave_particles/cave_particles.tscn" type="PackedScene" id=6]
 [ext_resource path="res://props/torch/torch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://actors/enemies/skeleton/skeleton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://actors/enemies/frogo/frogo.tscn" type="PackedScene" id=9]
 
 [node name="level_3" instance=ExtResource( 1 )]
 _LDtk_Resource = ExtResource( 2 )
@@ -17,12 +19,18 @@ LDtk_Resource = ExtResource( 2 )
 levels = [ "level_3" ]
 
 [node name="back_decoration" parent="." index="2"]
-tile_data = PoolIntArray( 9, 0, 65547, 10, 0, 65547, 11, 0, 65547, 12, 0, 65547, 13, 0, 65547, 14, 0, 65547, 15, 0, 65547, 16, 0, 131083, 65545, 0, 131083, 65546, 0, 65547, 65547, 0, 65547, 65548, 0, 65547, 65549, 0, 65547, 65550, 0, 65547, 65551, 0, 131083, 131082, 0, 131083, 131083, 0, 131084, 131084, 0, 131085, 131085, 0, 131083, 131086, 0, 131083, 196619, 0, 196620, 196620, 0, 196621, 327689, 0, 327693, 327690, 0, 327694, 327691, 0, 327693, 327692, 0, 327694, 327693, 0, 327695, 327694, 0, 327693, 327695, 0, 327694, 393240, 0, 327695, 393241, 0, 327693, 393247, 0, 327694, 393248, 0, 327695, 393249, 0, 393230, 393250, 0, 327692, 393253, 0, 393231, 393254, 0, 393230, 458772, 0, 327693, 458773, 0, 327694, 458774, 0, 327695, 458775, 0, 327693, 524298, 0, 262159, 589826, 0, 458754, 655361, 0, 458754, 655362, 0, 458754, 720897, 0, 458753, 720898, 0, 458753, 720899, 0, 458753 )
+tile_data = PoolIntArray( 9, 0, 65547, 10, 0, 65547, 11, 0, 65547, 12, 0, 65547, 13, 0, 65547, 14, 0, 65547, 15, 0, 65547, 16, 0, 131083, 65545, 0, 131083, 65546, 0, 65547, 65547, 0, 65547, 65548, 0, 65547, 65549, 0, 65547, 65550, 0, 65547, 65551, 0, 131083, 131082, 0, 131083, 131083, 0, 131084, 131084, 0, 131085, 131085, 0, 131083, 131086, 0, 131083, 196619, 0, 196620, 196620, 0, 196621, 196621, 0, 262159, 327689, 0, 327693, 327690, 0, 327694, 327691, 0, 327693, 327692, 0, 327694, 327693, 0, 327695, 327694, 0, 327693, 327695, 0, 327694, 393240, 0, 327695, 393241, 0, 327693, 393247, 0, 327694, 393248, 0, 327695, 393249, 0, 393230, 393250, 0, 327692, 393253, 0, 393231, 393254, 0, 393230, 458772, 0, 327693, 458773, 0, 327694, 458774, 0, 327695, 458775, 0, 327693, 524298, 0, 262159, 589826, 0, 458754, 589834, 0, 327695, 589835, 0, 393229, 589836, 0, 393230, 655361, 0, 458754, 655362, 0, 458754, 720897, 0, 458753, 720898, 0, 458753, 720899, 0, 458753 )
 LDtk_Resource = ExtResource( 2 )
 levels = [ "level_3" ]
 
 [node name="slime" parent="enemies" index="0" instance=ExtResource( 3 )]
 position = Vector2( 280, 128 )
+
+[node name="frogo" parent="enemies" index="1" instance=ExtResource( 9 )]
+position = Vector2( 440, 112 )
+
+[node name="skeleton" parent="enemies" index="2" instance=ExtResource( 8 )]
+position = Vector2( 576, 112 )
 
 [node name="torch" parent="pickups" index="0" instance=ExtResource( 7 )]
 position = Vector2( 408, 112 )
@@ -52,7 +60,7 @@ position = Vector2( 792, -144 )
 [node name="hazards" parent="." index="12"]
 collision_layer = 2
 collision_mask = 0
-tile_data = PoolIntArray( 589829, 0, 458756, 589830, 0, 458757, 589831, 0, 458756, 589832, 0, 458756 )
+tile_data = PoolIntArray( 37, 0, 524293, 38, 0, 589829, 39, 0, 589830, 65574, 0, 524288, 65575, 0, 524289, 131110, 0, 589824, 131111, 0, 589825, 196646, 0, 524290, 196647, 0, 524291, 262182, 0, 589826, 262183, 0, 589827, 327719, 0, 524292, 393255, 0, 589828, 589829, 0, 458756, 589830, 0, 458757, 589831, 0, 458756, 589832, 0, 458756 )
 LDtk_Resource = ExtResource( 2 )
 levels = [ "level_3" ]
 
