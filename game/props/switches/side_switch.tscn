@@ -1,0 +1,205 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/tileset.png" type="Texture" id=5]
+[ext_resource path="res://props/switches/side_switch.gd" type="Script" id=6]
+[ext_resource path="res://general_purpose/damage_areas/receive_damage_area.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 3, 2 )
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/switch:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("rotate/switch:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 208, 128, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "pressed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/switch:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 208, 128, 12, 16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("rotate/switch:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, -1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "pressed_blue"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/switch:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 208, 112, 12, 16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("rotate/switch:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, -1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "released"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/switch:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("rotate/switch:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 208, 128, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "released_blue"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/switch:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("rotate/switch:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 208, 112, 16, 16 ) ]
+}
+
+[node name="side_switch" type="Node2D"]
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="rotate" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="switch" type="Sprite" parent="rotate"]
+position = Vector2( 0, -1 )
+texture = ExtResource( 5 )
+offset = Vector2( -8, -7 )
+region_enabled = true
+region_rect = Rect2( 208, 128, 16, 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="check_player" type="Area2D" parent="rotate"]
+visible = false
+collision_layer = 0
+collision_mask = 16
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="check_player_collision" type="CollisionShape2D" parent="rotate/check_player"]
+position = Vector2( -3, -8 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RcvDamageArea" type="Area2D" parent="rotate"]
+visible = false
+collision_layer = 0
+collision_mask = 1024
+script = ExtResource( 7 )
+
+[node name="check_player_collision" type="CollisionShape2D" parent="rotate/RcvDamageArea"]
+position = Vector2( -3, -8 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/pressed = SubResource( 3 )
+anims/pressed_blue = SubResource( 5 )
+anims/released = SubResource( 2 )
+anims/released_blue = SubResource( 6 )
+
+[connection signal="body_entered" from="rotate/check_player" to="." method="_on_check_player_body_entered" flags=7]

@@ -3,7 +3,6 @@
 [ext_resource path="res://general_purpose/moving_platforms/linear_moving_platform.gd" type="Script" id=1]
 
 [node name="moving_platform" type="Node2D"]
-position = Vector2( 79, 70 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true

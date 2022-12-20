@@ -6,7 +6,7 @@ signal player_dead
 signal deadly_impact
 
 const FLOOR_VEL = 70
-const AIR_VEL = 60
+const AIR_VEL = 80
 const AIR_ACCEL = 5
 const AIR_DECEL = 2
 const JUMP_VEL = 250

@@ -16,6 +16,7 @@ enum TweenEase {
 
 export( bool ) var player_trigger := true
 export( float ) var player_trigger_timer := 0.25
+export( bool ) var start_immediately := true
 export( bool ) var return_to_original := true
 export( bool ) var keep_moving := true
 export( float ) var wait_before_start := 0.0
@@ -56,8 +57,11 @@ func _ready():
 	call_deferred( "_set_additional_elements" )
 	if player_trigger:
 		_set_trigger_elements()
-	else:
+	elif start_immediately:
 		call_deferred( "_start_tween", true )
+
+func start():
+	call_deferred( "_start_tween", true )
 
 func _start_tween( first_tween : bool = false ) -> void:
 	_reset_tween( first_tween )

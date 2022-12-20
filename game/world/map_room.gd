@@ -9,8 +9,10 @@ signal start_level
 var player_dir := {}
 var player_pos : Vector2
 var is_boss_level := false
+var player_can_leave := true
 
 func _ready() -> void:
+	print( "starting ", name )
 	if Engine.editor_hint:
 		set_physics_process( false )
 		return
@@ -52,6 +54,7 @@ func _on_fadelayer_finished():
 
 
 func _on_player_leaving( worldpos : Vector2 ):
+	if not player_can_leave: return
 #	game.state.just_died = false
 	$fadelayer.fadeout()
 	yield( $fadelayer, "finished" )
@@ -66,6 +69,7 @@ func _on_player_dead():
 	sigmgr.emit_signal( "load_gamestate" )
 
 func _on_deadly_impact():
+	player_can_leave = false
 	$background/flash_tween.start( 0.2, 2 )
 
 

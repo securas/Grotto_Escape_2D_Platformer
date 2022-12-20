@@ -13,7 +13,7 @@ func _check_player() -> void:
 		game.player.get_global_position_with_offset(),
 		PATROL_REACH,
 		obj.dir_cur,
-		2.0,
+		0.7,
 		[],
 		1
 	)
