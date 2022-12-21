@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/enemies.png" type="Texture" id=1]
 [ext_resource path="res://general_purpose/fsm/fsm_anim.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://general_purpose/effects/flash_tween.tscn" type="PackedScene" id=10]
 [ext_resource path="res://actors/enemies/bouncybob/bouncybob_hit.gd" type="Script" id=11]
 [ext_resource path="res://general_purpose/damage_areas/deal_damage_area.gd" type="Script" id=12]
+[ext_resource path="res://actors/enemies/bouncybob/bouncybob_pop.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 5, 6 )
@@ -190,6 +191,9 @@ anims/walk = SubResource( 3 )
 script = ExtResource( 2 )
 
 [node name="states" type="Node" parent="."]
+
+[node name="pop" type="Node" parent="states"]
+script = ExtResource( 13 )
 
 [node name="initiate" type="Node" parent="states"]
 script = ExtResource( 8 )

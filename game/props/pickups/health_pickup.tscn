@@ -64,5 +64,3 @@ region_rect = Rect2( 0, 16, 16, 16 )
 autoplay = "cycle"
 anims/RESET = SubResource( 1 )
 anims/cycle = SubResource( 2 )
-
-[connection signal="body_entered" from="." to="." method="_on_health_pickup_body_entered" flags=7]

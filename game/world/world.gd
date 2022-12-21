@@ -33,6 +33,7 @@ func _on_change_level( worldpos : Vector2, player_dir : Dictionary ):
 	var _ret = cur_level.connect( "change_level", self, "_on_change_level" )
 	cur_level.player_dir = player_dir
 	cur_level.player_pos = worldpos
+	cur_level.world = world
 	
 	for l in $maps.get_children():
 		l.queue_free()

@@ -39,6 +39,7 @@ func _update_energy() -> void:
 
 var temperature_alert := false
 func _update_temperature() -> void:
+	$temperature.visible = game.state.weapon_enabled
 	if cur_weapon_temperature == game.state.weapon_temperature and \
 		cur_weapon_max_temperature == game.state.weapon_max_temperature:
 			return

@@ -56,11 +56,17 @@ func _physics_process( delta: float ) -> void:
 		game.state.weapon_temperature - game.state.weapon_cooldown_rate * delta,
 		0.0 )
 
+func set_cutscene( a : bool = true, nxt_state : FSM_State = null ):
+	if a:
+		fsm.state_nxt = fsm.states.cutscene
+	else:
+		fsm.state_nxt = fsm.states.idle if not nxt_state else nxt_state
+
 func move_with_snap() -> void:
 	vel = move_and_slide_with_snap( vel, Vector2.DOWN * 8, Vector2.UP, true )
 
 func can_fire() -> bool:
-	if is_firing: return false
+	if is_firing or not game.state.weapon_enabled: return false
 	if game.state.weapon_temperature >= ( game.state.weapon_max_temperature - 1 ):
 		return false
 	return true

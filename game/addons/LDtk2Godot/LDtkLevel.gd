@@ -168,3 +168,11 @@ func _report_player_detected( player_world_position : Vector2 ) -> void:
 	if _player_reported: return
 #	_player_reported = true
 	emit_signal( "player_leaving_level", player_world_position )
+
+
+func get_level_rect() -> Rect2:
+	return _level.rect
+
+func get_worldpos( obj : Node2D ) -> Vector2:
+	if not obj: return _level.rect.position
+	return _level.rect.position + obj.global_position

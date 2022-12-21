@@ -10,6 +10,7 @@ var player_dir := {}
 var player_pos : Vector2
 var is_boss_level := false
 var player_can_leave := true
+var world : LDtkWorldData
 
 func _ready() -> void:
 	print( "starting ", name )
@@ -55,6 +56,8 @@ func _on_fadelayer_finished():
 
 func _on_player_leaving( worldpos : Vector2 ):
 	if not player_can_leave: return
+	var nxt_level = world.get_level_at( worldpos )
+	if not nxt_level: return
 #	game.state.just_died = false
 	$fadelayer.fadeout()
 	yield( $fadelayer, "finished" )
@@ -73,8 +76,8 @@ func _on_deadly_impact():
 	$background/flash_tween.start( 0.2, 2 )
 
 
-#func shake( duration : float, frequency : float, intensity : float ):
-#	sigmgr.emit_signal( "camera_shake", duration, frequency, intensity )
+func shake( duration : float, frequency : float, intensity : float ):
+	sigmgr.emit_signal( "camera_shake", duration, frequency, intensity )
 
 
 func create_save():

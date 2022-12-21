@@ -35,6 +35,7 @@ func _ready() -> void:
 				$anim.play( "pressed_blue" )
 		$rotate/check_player.queue_free()
 		$rotate/RcvDamageArea.queue_free()
+		call_deferred( "emit_signal", "pressed" )
 
 func _on_check_player_body_entered( _body: Node ) -> void:
 	if is_pressed: return

@@ -66,6 +66,7 @@ func set_initial_gamestate():
 	state.events = []
 	state.max_energy = 5
 	state.energy = state.max_energy
+	state.weapon_enabled = false
 	state.weapon_temperature = 0
 	state.weapon_max_temperature = 5
 	state.weapon_cooldown_rate = 1.0
@@ -75,6 +76,7 @@ func set_initial_gamestate():
 	var _ret = save_gamestate()
 
 func _set_debug_gamestate():
+	state.weapon_enabled = true
 	pass
 
 

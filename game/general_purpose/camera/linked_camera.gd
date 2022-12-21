@@ -117,10 +117,13 @@ func _compute_shake( delta : float ) -> bool:
 		_shake_offset = _shake_offset.linear_interpolate( Vector2.ZERO, delta )
 		return false
 
-func _on_camera_temporary_target( target, duration : float = 1.0 ):
-	_temporary_target_ref = weakref( target )
-	_temporary_target_timer = duration
-	_is_temporary_target = true
+func _on_camera_temporary_target( target = null, duration : float = 1.0 ):
+	if target:
+		_temporary_target_ref = weakref( target )
+		_temporary_target_timer = duration
+		_is_temporary_target = true
+	else:
+		_is_temporary_target = false
 
 func _physics_process( delta ):
 	# shake camera
@@ -135,8 +138,9 @@ func _physics_process( delta ):
 		else:
 			if _temporary_target_ref:
 				global_position = _temporary_target_ref.get_ref().global_position
-				_temporary_target_timer -= delta
-				if _temporary_target_timer <= 0:
-					_is_temporary_target = false
+				if _temporary_target_timer > 0:
+					_temporary_target_timer -= delta
+					if _temporary_target_timer <= 0:
+						_is_temporary_target = false
 			else:
 				_is_temporary_target = false

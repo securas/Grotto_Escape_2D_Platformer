@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/hud.png" type="Texture" id=1]
+[ext_resource path="res://props/pickups/gun_pickup.gd" type="Script" id=2]
+[ext_resource path="res://assets/flash_lightmask.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1, 5 )
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pickup:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 32, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "cycle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pickup:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 32, 16, 16 ), Rect2( 16, 32, 16, 16 ), Rect2( 32, 32, 16, 16 ), Rect2( 48, 32, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("light:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "cycle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("light:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 1 ), Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, 1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
+}
+
+[node name="gun_pickup" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -5 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="pickup" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 16, 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+autoplay = "cycle"
+anims/RESET = SubResource( 1 )
+anims/cycle = SubResource( 2 )
+
+[node name="shaking_light" type="Node2D" parent="."]
+position = Vector2( 0, -7 )
+
+[node name="light" type="Light2D" parent="shaking_light"]
+texture = ExtResource( 3 )
+range_item_cull_mask = 2
+
+[node name="light_anim" type="AnimationPlayer" parent="shaking_light"]
+autoplay = "cycle"
+anims/RESET = SubResource( 4 )
+anims/cycle = SubResource( 5 )

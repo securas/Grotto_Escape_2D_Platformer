@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/player.png" type="Texture" id=1]
 [ext_resource path="res://actors/player/player.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://actors/player/player_hit.gd" type="Script" id=11]
 [ext_resource path="res://general_purpose/effects/flash_tween.tscn" type="PackedScene" id=12]
 [ext_resource path="res://actors/player/player_dead.gd" type="Script" id=13]
+[ext_resource path="res://actors/player/player_cutscene.gd" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 4, 6 )
@@ -345,6 +346,9 @@ script = ExtResource( 11 )
 [node name="dead" type="Node" parent="states"]
 script = ExtResource( 13 )
 
+[node name="cutscene" type="Node" parent="states"]
+script = ExtResource( 14 )
+
 [node name="RcvDamageArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
@@ -362,6 +366,7 @@ __meta__ = {
 }
 
 [node name="death_area" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 __meta__ = {
