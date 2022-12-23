@@ -28,26 +28,31 @@ func _on_enemy_wave_finished() -> void:
 	spawn_state += 1
 	match spawn_state:
 		0:
-			_spawn_enemy( $enemies/spawn_position_1 )
+			_spawn_enemy( EnemyTypes.BOB, $enemies/spawn_position_1 )
 		1:
-			_spawn_enemy( $enemies/spawn_position_2, -1 )
+			_spawn_enemy( EnemyTypes.SLIME, $enemies/spawn_position_2, -1 )
 		2:
-			_spawn_enemy( $enemies/spawn_position_1 )
+			_spawn_enemy( EnemyTypes.SLIME, $enemies/spawn_position_1 )
 		3:
-			_spawn_enemy( $enemies/spawn_position_2, -1 )
+			_spawn_enemy( EnemyTypes.BOB, $enemies/spawn_position_2, -1 )
 		4:
-			_spawn_enemy( $enemies/spawn_position_1 )
-			_spawn_enemy( $enemies/spawn_position_2, -1 )
+			_spawn_enemy( EnemyTypes.SLIME, $enemies/spawn_position_1 )
+			_spawn_enemy( EnemyTypes.SLIME, $enemies/spawn_position_2, -1 )
 		5:
-			_spawn_enemy( $enemies/spawn_position_3 )
-			_spawn_enemy( $enemies/spawn_position_4 )
-			_spawn_enemy( $enemies/spawn_position_5, -1 )
-			_spawn_enemy( $enemies/spawn_position_6, -1 )
+			_spawn_enemy( EnemyTypes.BOB, $enemies/spawn_position_3 )
+			_spawn_enemy( EnemyTypes.SLIME, $enemies/spawn_position_4 )
+			_spawn_enemy( EnemyTypes.SLIME, $enemies/spawn_position_5, -1 )
+			_spawn_enemy( EnemyTypes.BOB, $enemies/spawn_position_6, -1 )
 		_:
 			_finished_enemies()
-
-func _spawn_enemy( pos : Position2D, dir : float = 1.0 ) -> void:
-	var b = preload( "res://actors/enemies/bouncybob/bouncybob.tscn" ).instance()
+enum EnemyTypes { BOB, SLIME }
+func _spawn_enemy( enemy_type : int, pos : Position2D, dir : float = 1.0 ) -> void:
+	var b : Node
+	match enemy_type:
+		EnemyTypes.BOB:
+			b = preload( "res://actors/enemies/bouncybob/bouncybob.tscn" ).instance()
+		EnemyTypes.SLIME:
+			b = preload( "res://actors/enemies/slime/slime.tscn" ).instance()
 	b.position = pos.position
 	b.dir_nxt = dir
 	var _ret = b.connect( "tree_exited", self, "_on_enemy_killed", \

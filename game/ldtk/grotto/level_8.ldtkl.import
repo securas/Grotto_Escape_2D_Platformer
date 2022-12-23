@@ -1,0 +1,13 @@
+[remap]
+
+importer="LDtk2Godot"
+type="PackedDataContainer"
+path="res://.import/level_8.ldtkl-9d162eafcdebc325be9bfcc6d1293668.res"
+
+[deps]
+
+source_file="res://ldtk/grotto/level_8.ldtkl"
+dest_files=[ "res://.import/level_8.ldtkl-9d162eafcdebc325be9bfcc6d1293668.res" ]
+
+[params]
+

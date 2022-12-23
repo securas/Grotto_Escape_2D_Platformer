@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/tileset.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 88, 16 )
+
+[node name="giant_snake" type="KinematicBody2D"]
+motion/sync_to_physics = true
+moving_platform_apply_velocity_on_leave = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2( 88, -16 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="head" type="Sprite" parent="."]
+position = Vector2( 24, -16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 224, 48, 32 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body_1" type="Sprite" parent="."]
+position = Vector2( 64, -16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 224, 32, 32 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body_2" type="Sprite" parent="."]
+position = Vector2( 96, -16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 224, 32, 32 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body_3" type="Sprite" parent="."]
+position = Vector2( 128, -16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 224, 32, 32 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body_4" type="Sprite" parent="."]
+position = Vector2( 160, -16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 224, 32, 32 )
+__meta__ = {
+"_edit_lock_": true
+}

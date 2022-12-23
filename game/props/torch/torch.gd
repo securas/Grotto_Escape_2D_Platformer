@@ -11,6 +11,7 @@ func _ready() -> void:
 
 func _on_torch_body_entered( _body: Node ) -> void:
 	if is_active: return
+	game.state.worldpos = owner.get_worldpos( self )
 	var _ret = game.save_gamestate()
 	activate()
 	var x = preload( "res://vfx/explosion_24px.tscn" ).instance()

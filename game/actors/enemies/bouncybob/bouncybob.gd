@@ -14,6 +14,9 @@ func _physics_process( delta: float ) -> void:
 	fsm.run_machine( delta )
 	update_dir( rotate )
 	
+	# force attack
+	_check_attack_player()
+	
 func _set_ground_vel( multiplier : float ) -> void:
 	$states/patrol.patrol_velocity = PATROL_VEL * multiplier
 	$states/chase.chase_velocity = CHASE_VEL * multiplier
@@ -47,3 +50,6 @@ func _on_receiving_damage( from, damage ):
 
 
 
+func _check_attack_player() -> void:
+	if fsm.states.fire.can_attack_player():
+		fsm.push( fsm.states.fire )

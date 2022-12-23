@@ -1,14 +1,14 @@
 extends Enemy
 
-const PATROL_VEL = 30
-const CHASE_VEL = 60
+const PATROL_VEL = 20
+const CHASE_VEL = 30
 
 onready var fsm := StackedFSM.new( self, $states, $states/initiate, $anim, false )
 onready var rotate := $rotate
 
 func _ready():
 	position_offset = Vector2.UP * 6
-	energy = 6
+	energy = 3
 	$states/initiate.nxt_state = $states/patrol
 	$states/patrol.patrol_velocity = PATROL_VEL
 	$states/chase.chase_velocity = CHASE_VEL
@@ -16,10 +16,7 @@ func _ready():
 func _physics_process( delta: float ) -> void:
 	fsm.run_machine( delta )
 	update_dir( rotate )
-	
-#func _set_ground_vel( multiplier : float ) -> void:
-#	$states/patrol.patrol_velocity = PATROL_VEL * multiplier
-#	$states/chase.chase_velocity = CHASE_VEL * multiplier
+
 
 func _on_receiving_damage( from, damage ):
 	energy = int( max( energy - damage, 0 ) )
