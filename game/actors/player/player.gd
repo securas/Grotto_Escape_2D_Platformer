@@ -125,3 +125,31 @@ func _on_death_area_body_entered( _body: Node ) -> void:
 	invulnerable_timer = -0.5
 	emit_signal( "deadly_impact" )
 	
+
+
+func _dust( scn : PackedScene ) -> void:
+	var d = scn.instance()
+	d.scale.x = dir_cur
+	d.position = position
+	get_parent().add_child( d )
+
+func run_dust() -> void:
+	_dust( preload( "res://actors/player/vfx/run_dust.tscn" ) )
+
+func jump_dust() -> void:
+	if abs( vel.x ) > 10:
+		_dust( preload( "res://actors/player/vfx/jump_side_dust.tscn" ) )
+	else:
+		_dust( preload( "res://actors/player/vfx/jump_dust.tscn" ) )
+
+func land_dust() -> void:
+	_dust( preload( "res://actors/player/vfx/land_dust.tscn" ) )
+
+
+
+
+
+
+
+
+

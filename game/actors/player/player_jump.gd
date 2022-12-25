@@ -4,8 +4,11 @@ var jump_timer : float
 var jump_finished : bool
 
 func begin_jump():
+	obj.jump_dust()
+	
 	obj.vel.y = -obj.JUMP_VEL
 	obj.vel = obj.move_and_slide( obj.vel, Vector2.UP )
+	
 	fsm.state_nxt = fsm.states.jump
 	if obj.is_firing:
 		anim.nxt( "jump fire" )

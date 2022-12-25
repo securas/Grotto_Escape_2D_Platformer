@@ -12,6 +12,7 @@ endif
 
 all: \
 	$(TARGET)player.png \
+	$(TARGET)player_dust.png \
 	$(TARGET)tileset.png \
 	$(TARGET)enemies.png \
 	$(TARGET)explosion_16px.png \
@@ -22,6 +23,9 @@ all: \
 $(TARGET)player.png: player.aseprite
 	$(ASEPRITE) -b player.aseprite -sheet $(TARGET)player.png --sheet-width 64 --sheet-height 80
 	$(ASEPRITE) -b $(TARGET)player.png --script $(NORMAL_SCRIPT) --save-as $(TARGET)player_normal.png
+
+$(TARGET)player_dust.png: player_dust.aseprite
+	$(ASEPRITE) -b player_dust.aseprite -sheet $(TARGET)player_dust.png --sheet-width 64
 
 $(TARGET)enemies.png: enemies.aseprite
 	$(ASEPRITE) -b enemies.aseprite -sheet $(TARGET)enemies.png --sheet-width 64

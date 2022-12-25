@@ -37,6 +37,7 @@ func _run( delta : float ) -> void:
 		jump_buffer = 0.1
 		
 	if obj.is_on_floor():
+		obj.land_dust()
 		if jump_buffer > 0:
 			fsm.states.jump.begin_jump()
 			return

@@ -114,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://general_purpose/player_control/player_control.gd"
 }, {
+"base": "AnimationPlayer",
+"class": "RandomAnimation",
+"language": "GDScript",
+"path": "res://general_purpose/animation_players/random_animation.gd"
+}, {
 "base": "Area2D",
 "class": "RcvDamageArea",
 "language": "GDScript",
@@ -161,6 +166,7 @@ _global_script_class_icons={
 "MapRoom": "",
 "Pickup": "",
 "PlayerControl": "",
+"RandomAnimation": "",
 "RcvDamageArea": "",
 "SignalManager": "",
 "StackedFSM": "",
