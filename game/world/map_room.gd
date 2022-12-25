@@ -13,7 +13,7 @@ var player_can_leave := true
 var world : LDtkWorldData
 
 func _ready() -> void:
-	print( "starting ", name )
+#	print( "starting ", name )
 	if Engine.editor_hint:
 		set_physics_process( false )
 		return

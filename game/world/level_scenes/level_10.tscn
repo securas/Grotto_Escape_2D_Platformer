@@ -47,6 +47,7 @@ dir_nxt = -1.0
 [node name="cave_particles" parent="enemies/slime3" index="6" instance=ExtResource( 5 )]
 
 [node name="water_lava" parent="." index="6"]
+tile_data = PoolIntArray( 655393, 0, 917514, 655394, 0, 917515, 720929, 0, 983050, 720930, 0, 983051 )
 LDtk_Resource = ExtResource( 2 )
 levels = [ "level_10" ]
 

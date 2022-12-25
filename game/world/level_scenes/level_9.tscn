@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://world/map_room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ldtk/grotto/level_9.ldtkl" type="PackedDataContainer" id=2]
 [ext_resource path="res://props/cave_particles/cave_particles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/flying_eye/flying_eye.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 73, 8.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8.5, 32.5 )
 
 [node name="level_9" instance=ExtResource( 1 )]
 _LDtk_Resource = ExtResource( 2 )
@@ -16,6 +23,29 @@ levels = [ "level_9" ]
 tile_data = PoolIntArray( 11, 0, 65547, 12, 0, 65547, 13, 0, 65547, 65548, 0, 131084, 65549, 0, 131085, 131073, 0, 458758, 131074, 0, 458759, 131084, 0, 196620, 131085, 0, 196621, 131088, 0, 131086, 131089, 0, 131087, 196624, 0, 196622, 196625, 0, 196623, 458753, 0, 327693, 458756, 0, 327695, 458761, 0, 327695, 458764, 0, 393230, 458766, 0, 393231, 524303, 0, 393230, 524306, 0, 393231 )
 LDtk_Resource = ExtResource( 2 )
 levels = [ "level_9" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/enemy_barriers" index="0"]
+position = Vector2( 152, 24 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="enemies/enemy_barriers" index="1"]
+position = Vector2( 128, 136 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemies/enemy_barriers" index="2"]
+position = Vector2( -8, 104 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="enemies/enemy_barriers" index="3"]
+position = Vector2( 328, 120 )
+shape = SubResource( 2 )
+
+[node name="flying_eye" parent="enemies" index="1" instance=ExtResource( 4 )]
+position = Vector2( 112, 48 )
+
+[node name="flying_eye2" parent="enemies" index="2" instance=ExtResource( 4 )]
+position = Vector2( 280, 72 )
+dir_nxt = -1.0
 
 [node name="water_lava" parent="." index="6"]
 tile_data = PoolIntArray( 655365, 0, 917514, 655366, 0, 917515, 655367, 0, 917514, 655368, 0, 917515, 720901, 0, 983050, 720902, 0, 983051, 720903, 0, 983050, 720904, 0, 983051 )

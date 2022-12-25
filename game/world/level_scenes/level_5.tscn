@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://world/map_room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ldtk/grotto/level_5.ldtkl" type="PackedDataContainer" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://props/god_ray/god_ray.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/enemies/bouncybob/bouncybob.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/enemies/slime/slime.tscn" type="PackedScene" id=7]
+[ext_resource path="res://actors/enemies/flying_eye/flying_eye.tscn" type="PackedScene" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 96 )
 
 [node name="level_5" instance=ExtResource( 1 )]
 _LDtk_Resource = ExtResource( 2 )
@@ -30,6 +34,13 @@ dir_nxt = -1.0
 
 [node name="slime" parent="enemies" index="2" instance=ExtResource( 7 )]
 position = Vector2( 392, 112 )
+
+[node name="flying_eye" parent="enemies" index="3" instance=ExtResource( 8 )]
+position = Vector2( 384, 40 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/enemy_barriers" index="0"]
+position = Vector2( 364, 96 )
+shape = SubResource( 1 )
 
 [node name="water_lava" parent="." index="6"]
 tile_data = PoolIntArray( 589829, 0, 917514, 589830, 0, 917515, 589845, 0, 917514, 589846, 0, 917515, 655365, 0, 983050, 655366, 0, 983051, 655381, 0, 983050, 655382, 0, 983051 )

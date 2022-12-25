@@ -45,6 +45,7 @@ LDtk_Resource = ExtResource( 2 )
 levels = [ "level_6" ]
 
 [node name="hazards" parent="." index="8"]
+tile_data = PoolIntArray( 655364, 0, 851972, 655365, 0, 851973 )
 LDtk_Resource = ExtResource( 2 )
 levels = [ "level_6" ]
 

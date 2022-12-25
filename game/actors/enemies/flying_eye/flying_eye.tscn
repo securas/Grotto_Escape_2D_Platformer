@@ -1,0 +1,183 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://general_purpose/damage_areas/deal_damage_area.gd" type="Script" id=1]
+[ext_resource path="res://general_purpose/fsm/fsm_anim.gd" type="Script" id=2]
+[ext_resource path="res://materials/light_glow/light_glow.material" type="Material" id=3]
+[ext_resource path="res://general_purpose/damage_areas/receive_damage_area.gd" type="Script" id=4]
+[ext_resource path="res://general_purpose/effects/flash_tween.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/enemies.png" type="Texture" id=6]
+[ext_resource path="res://assets/enemies_normal.png" type="Texture" id=7]
+[ext_resource path="res://actors/enemies/flying_eye/flying_eye.gd" type="Script" id=8]
+[ext_resource path="res://general_purpose/actor/enemy_behaviors/initiate.gd" type="Script" id=9]
+[ext_resource path="res://actors/enemies/flying_eye/flying_eye_chase.gd" type="Script" id=10]
+[ext_resource path="res://actors/enemies/slime/slime_pop.gd" type="Script" id=11]
+[ext_resource path="res://actors/enemies/flying_eye/flying_eye_patrol.gd" type="Script" id=12]
+[ext_resource path="res://actors/enemies/flying_eye/flying_eye_hit.gd" type="Script" id=13]
+[ext_resource path="res://actors/enemies/flying_eye/flying_eye_return.gd" type="Script" id=14]
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 6.0
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/enemy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "hit"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/enemy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "run"
+length = 0.25
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/enemy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "walk"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/enemy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10 ]
+}
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 7.01783
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 4.0
+
+[node name="flying_eye" type="KinematicBody2D"]
+collision_layer = 512
+collision_mask = 2049
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="rotate" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="enemy" type="Sprite" parent="rotate"]
+light_mask = 2
+material = ExtResource( 3 )
+texture = ExtResource( 6 )
+normal_map = ExtResource( 7 )
+hframes = 4
+vframes = 7
+frame = 8
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="flash_tween" parent="rotate/enemy" instance=ExtResource( 5 )]
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/hit = SubResource( 7 )
+anims/run = SubResource( 4 )
+anims/walk = SubResource( 3 )
+script = ExtResource( 2 )
+
+[node name="states" type="Node" parent="."]
+
+[node name="initiate" type="Node" parent="states"]
+script = ExtResource( 9 )
+
+[node name="pop" type="Node" parent="states"]
+script = ExtResource( 11 )
+
+[node name="patrol" type="Node" parent="states"]
+script = ExtResource( 12 )
+
+[node name="chase" type="Node" parent="states"]
+script = ExtResource( 10 )
+
+[node name="return" type="Node" parent="states"]
+script = ExtResource( 14 )
+
+[node name="hit" type="Node" parent="states"]
+script = ExtResource( 13 )
+
+[node name="RcvDamageArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 1024
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="damage_collision" type="CollisionShape2D" parent="RcvDamageArea"]
+shape = SubResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DealDamageArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 32
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="damage_collision" type="CollisionShape2D" parent="DealDamageArea"]
+shape = SubResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}

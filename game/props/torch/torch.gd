@@ -3,11 +3,11 @@ extends Area2D
 var is_active := false
 var id : String
 
-func _ready() -> void:
-	if Engine.editor_hint: return
-	id = Utils.get_unique_id( self )
-	if game.is_event( "savepoint_" + id ):
-		activate()
+#func _ready() -> void:
+#	if Engine.editor_hint: return
+#	id = Utils.get_unique_id( self )
+#	if game.is_event( "savepoint_" + id ):
+#		activate()
 
 func _on_torch_body_entered( _body: Node ) -> void:
 	if is_active: return

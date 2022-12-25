@@ -25,6 +25,26 @@ _global_script_classes=[ {
 "path": "res://general_purpose/actor/enemy.gd"
 }, {
 "base": "StackedFSM_State",
+"class": "EnemyBehavior_AirChase",
+"language": "GDScript",
+"path": "res://general_purpose/actor/enemy_behaviors/air_chase.gd"
+}, {
+"base": "StackedFSM_State",
+"class": "EnemyBehavior_AirHit",
+"language": "GDScript",
+"path": "res://general_purpose/actor/enemy_behaviors/air_hit.gd"
+}, {
+"base": "StackedFSM_State",
+"class": "EnemyBehavior_AirPatrol",
+"language": "GDScript",
+"path": "res://general_purpose/actor/enemy_behaviors/air_patrol.gd"
+}, {
+"base": "StackedFSM_State",
+"class": "EnemyBehavior_AirReturn",
+"language": "GDScript",
+"path": "res://general_purpose/actor/enemy_behaviors/air_return.gd"
+}, {
+"base": "StackedFSM_State",
 "class": "EnemyBehavior_FloorChase",
 "language": "GDScript",
 "path": "res://general_purpose/actor/enemy_behaviors/floor_chase.gd"
@@ -148,6 +168,10 @@ _global_script_class_icons={
 "Actor": "",
 "DealDamageArea": "",
 "Enemy": "",
+"EnemyBehavior_AirChase": "",
+"EnemyBehavior_AirHit": "",
+"EnemyBehavior_AirPatrol": "",
+"EnemyBehavior_AirReturn": "",
 "EnemyBehavior_FloorChase": "",
 "EnemyBehavior_FloorHit": "",
 "EnemyBehavior_FloorPatrol": "",
@@ -280,6 +304,7 @@ btn_attack={
 2d_physics/layer_6="player hitbox"
 2d_physics/layer_10="enemy"
 2d_physics/layer_11="enemy hitboix"
+2d_physics/layer_12="enemy_barrier"
 
 [physics]
 
