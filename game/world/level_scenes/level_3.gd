@@ -7,6 +7,7 @@ var enemy_counter := 0
 var finished_spawning := false
 
 func _ready() -> void:
+	if Engine.editor_hint: return
 	if game.is_event( "picked gun" ):
 		if not game.is_event( "finished gun enemies" ):
 			_on_gun_pickup_item_picked()

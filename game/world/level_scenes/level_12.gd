@@ -5,6 +5,7 @@ var spawn_state := -1
 var enemy_counter := 0
 
 func _ready() -> void:
+	if Engine.editor_hint: return
 	if game.is_event( "finished_level_12" ):
 		$walls/gate/block_anim.play( "default" )
 	else:

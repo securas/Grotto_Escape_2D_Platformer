@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://world/map_room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/level_scenes/level_12.gd" type="Script" id=2]
 [ext_resource path="res://props/platforms/block_platform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ldtk/grotto/level_12.ldtkl" type="PackedDataContainer" id=4]
+[ext_resource path="res://actors/enemies/small_boss/small_boss.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -150,6 +151,9 @@ position = Vector2( 160, 88 )
 
 [node name="spawn_position_6" type="Position2D" parent="enemies" index="7"]
 position = Vector2( 160, 48 )
+
+[node name="small_boss" parent="enemies" index="8" instance=ExtResource( 5 )]
+position = Vector2( 160, 88 )
 
 [node name="water_lava" parent="." index="6"]
 LDtk_Resource = ExtResource( 4 )
