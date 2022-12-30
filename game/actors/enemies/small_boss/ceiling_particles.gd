@@ -9,6 +9,8 @@ func _ready() -> void:
 	for count in range( get_child_count() ):
 		var p = get_child( count )
 		if not p is ExplodingBodyPart: continue
+		p.position_margin = 150
+		p.checktimer = 2.0
 		p.part_color = main_color if count < get_child_count() * 0.5 else second_color
 		p.size = 1 + ( randi() % 2 )
 		p.set_part()

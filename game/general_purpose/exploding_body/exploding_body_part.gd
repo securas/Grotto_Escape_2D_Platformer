@@ -14,7 +14,7 @@ var position_buffer_avg := Vector2.ZERO
 func _ready():
 	for _c in range( buflen ):
 		position_buffer.append( position )
-	position_buffer_avg = position
+	position_buffer_avg = position / float( buflen )
 	contacts_reported = 2
 	contact_monitor = true
 
@@ -26,11 +26,17 @@ func _process(delta):
 	if checktimer >= 0:
 		checktimer -= delta
 		return
-	var found_walls = false
-	for b in get_colliding_bodies():
-		if b.get_collision_layer_bit(0):
-			found_walls = true
-	if not found_walls: return
+	checktimer = 0.1
+	var screenpos = Utils.screen_position( self )
+	if screenpos.y > 10 * 180:
+		emit_signal( "settled" )
+		set_process( false )
+		return
+#	var found_walls = false
+#	for b in get_colliding_bodies():
+#		if b.get_collision_layer_bit(0):
+#			found_walls = true
+#	if not found_walls: return
 	if position.distance_squared_to( position_buffer_avg ) < position_margin:
 		emit_signal( "settled" )
 		set_process( false )

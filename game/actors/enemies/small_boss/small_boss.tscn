@@ -3,8 +3,8 @@
 [ext_resource path="res://actors/enemies/small_boss/small_boss.gd" type="Script" id=1]
 [ext_resource path="res://assets/tileset.png" type="Texture" id=2]
 [ext_resource path="res://actors/enemies/small_boss/small_boss_idle.gd" type="Script" id=3]
-[ext_resource path="res://actors/enemies/small_boss/small_boss_attack_one_hand.gd" type="Script" id=4]
-[ext_resource path="res://actors/enemies/small_boss/small_boss_hand.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/enemies/small_boss/small_boss_hand/small_boss_hand.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/enemies/small_boss/small_boss_enter.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -32,11 +32,11 @@ __meta__ = {
 
 [node name="states" type="Node" parent="."]
 
+[node name="enter" type="Node" parent="states"]
+script = ExtResource( 6 )
+
 [node name="idle" type="Node" parent="states"]
 script = ExtResource( 3 )
-
-[node name="attack_one_hand" type="Node" parent="states"]
-script = ExtResource( 4 )
 
 [node name="hand_right" parent="." instance=ExtResource( 5 )]
 position = Vector2( 33, 16 )

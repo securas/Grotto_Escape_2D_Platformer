@@ -3,7 +3,20 @@ extends ExplodingBodyPart
 var part_color := Color.white
 var size := 1
 
+#var debug := true
+#var pdebug : Sprite
 
+
+#func _ready() -> void:
+#	if debug:
+#		pdebug = Sprite.new()
+#		pdebug.texture = $pixel.texture
+#		pdebug.modulate = Color.red
+#		pdebug.z_index = 100
+#		get_parent().call_deferred( "add_child", pdebug )
+
+#func _physics_process(_delta: float) -> void:
+#	pdebug.position = position_buffer_avg
 
 func set_part() -> void:
 	$pixel.modulate = part_color
@@ -21,7 +34,7 @@ func _on_enemy_part_settled() -> void:
 	n.add_child( p )
 	$particles.emitting = false
 	$pixel.hide()
-	
+	$end_timer.start()
 
 
 func _on_end_timer_timeout() -> void:
