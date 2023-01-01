@@ -16,6 +16,7 @@ func _initialize() -> void:
 	state = SubStates.HIT
 	target_coordinate = 160 + WALL_COORDINATE * obj.rotate.scale.x - \
 		12 * obj.rotate.scale.x
+	anim.nxt( "default" )
 
 func _run( delta ) -> void:
 	match state:

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/pixel.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+void fragment()
+{
+	vec2 uv = SCREEN_UV;
+	float offset = 1.0 / 320.0 * sin( uv.y * 180.0 / 2.0 + 2.0 * TIME );
+	offset = round( offset / SCREEN_PIXEL_SIZE.x ) * SCREEN_PIXEL_SIZE.x;
+	uv.x += offset;
+	COLOR = textureLod( SCREEN_TEXTURE, uv, 0.0 );
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+
+[node name="heat_layer" type="CanvasLayer"]
+layer = 100
+
+[node name="heat_pixel" type="Sprite" parent="."]
+material = SubResource( 5 )
+scale = Vector2( 320, 180 )
+texture = ExtResource( 1 )
+centered = false

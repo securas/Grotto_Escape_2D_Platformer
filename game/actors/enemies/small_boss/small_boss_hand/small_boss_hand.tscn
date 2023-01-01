@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/tileset.png" type="Texture" id=1]
 [ext_resource path="res://actors/enemies/small_boss/small_boss_hand/small_boss_hand.gd" type="Script" id=2]
@@ -7,6 +7,55 @@
 [ext_resource path="res://actors/enemies/small_boss/small_boss_hand/small_boss_hand_drop_drag.gd" type="Script" id=5]
 [ext_resource path="res://actors/enemies/small_boss/small_boss_hand/small_boss_hand_hit_wall.gd" type="Script" id=6]
 [ext_resource path="res://actors/enemies/small_boss/small_boss_hand/small_boss_hand_wait.gd" type="Script" id=7]
+[ext_resource path="res://general_purpose/fsm/fsm_anim.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/hand_right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/hand_right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/hand_right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, 2 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -85,9 +134,13 @@ texture = ExtResource( 1 )
 offset = Vector2( 0, -13 )
 region_enabled = true
 region_rect = Rect2( 144, 0, 32, 26 )
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/default = SubResource( 5 )
+anims/idle = SubResource( 6 )
+blend_times = [ "default", "idle", 0.5 ]
+script = ExtResource( 8 )
 
 [node name="states" type="Node" parent="."]
 

@@ -149,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://general_purpose/game_mgr/sig_mgr.gd"
 }, {
+"base": "Enemy",
+"class": "SmallBossHand",
+"language": "GDScript",
+"path": "res://actors/enemies/small_boss/small_boss_hand/small_boss_hand.gd"
+}, {
 "base": "Reference",
 "class": "StackedFSM",
 "language": "GDScript",
@@ -193,6 +198,7 @@ _global_script_class_icons={
 "RandomAnimation": "",
 "RcvDamageArea": "",
 "SignalManager": "",
+"SmallBossHand": "",
 "StackedFSM": "",
 "StackedFSM_State": "",
 "Utils": ""

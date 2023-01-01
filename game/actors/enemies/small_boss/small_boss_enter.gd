@@ -20,6 +20,7 @@ func _initialize() -> void:
 		initial_position, final_position, duration, \
 		Tween.TRANS_SINE, Tween.EASE_OUT, 0.0 )
 	_ret = _tw.start()
+	anim.nxt( "RESET" )
 
 func _finished_entering() -> void:
 	fsm.pop()

@@ -9,7 +9,8 @@ var drop_timer : float
 func _initialize() -> void:
 	obj.vel = Vector2( 0, -200 )
 	dropping_hand = true
-	drop_timer = 2.0
+	drop_timer = 1.0
+	anim.nxt( "default" )
 
 func _run( delta ) -> void:
 	if dropping_hand:
@@ -24,6 +25,7 @@ func _run( delta ) -> void:
 	else:
 		drop_timer -= delta
 		if drop_timer <= 0:
+			obj.emit_signal( "finished_attack" )
 			fsm.pop()
 
 func _hit_vfx() -> void:

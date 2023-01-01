@@ -14,10 +14,11 @@ var drag_dust_timer : float
 
 func _initialize() -> void:
 	obj.vel = Vector2( 0, -200 )
-	drop_timer = 2.0
+	drop_timer = 1.0
 	drag_timer = DRAG_TIME
 	state = SubStates.DROP
 	drag_dust_timer = 0.0
+	anim.nxt( "default" )
 
 func _run( delta ) -> void:
 	match state:

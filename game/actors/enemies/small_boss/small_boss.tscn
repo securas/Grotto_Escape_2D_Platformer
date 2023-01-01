@@ -1,12 +1,66 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://actors/enemies/small_boss/small_boss.gd" type="Script" id=1]
 [ext_resource path="res://assets/tileset.png" type="Texture" id=2]
 [ext_resource path="res://actors/enemies/small_boss/small_boss_idle.gd" type="Script" id=3]
+[ext_resource path="res://general_purpose/fsm/fsm_anim.gd" type="Script" id=4]
 [ext_resource path="res://actors/enemies/small_boss/small_boss_hand/small_boss_hand.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/enemies/small_boss/small_boss_enter.gd" type="Script" id=6]
+[ext_resource path="res://actors/enemies/small_boss/small_boss_eight_cycle.gd" type="Script" id=7]
+[ext_resource path="res://general_purpose/damage_areas/receive_damage_area.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, 2 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 16, 16 )
 
 [node name="small_boss" type="KinematicBody2D"]
@@ -26,9 +80,12 @@ __meta__ = {
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 16, 32, 32 )
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/default = SubResource( 3 )
+anims/idle = SubResource( 4 )
+script = ExtResource( 4 )
 
 [node name="states" type="Node" parent="."]
 
@@ -38,9 +95,27 @@ script = ExtResource( 6 )
 [node name="idle" type="Node" parent="states"]
 script = ExtResource( 3 )
 
+[node name="eight_cycle" type="Node" parent="states"]
+script = ExtResource( 7 )
+
 [node name="hand_right" parent="." instance=ExtResource( 5 )]
 position = Vector2( 33, 16 )
 
 [node name="hand_left" parent="." instance=ExtResource( 5 )]
 position = Vector2( -33, 16 )
 right_hand = false
+
+[node name="RcvDamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1024
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RcvDamageArea"]
+visible = false
+shape = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
