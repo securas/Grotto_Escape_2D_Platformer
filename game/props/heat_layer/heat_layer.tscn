@@ -19,9 +19,10 @@ shader = SubResource( 4 )
 
 [node name="heat_layer" type="CanvasLayer"]
 layer = 100
+follow_viewport_enable = true
 
 [node name="heat_pixel" type="Sprite" parent="."]
 material = SubResource( 5 )
-scale = Vector2( 320, 180 )
+scale = Vector2( 960, 540 )
 texture = ExtResource( 1 )
 centered = false

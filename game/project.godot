@@ -114,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/LDtk2Godot/LDtkWorldData.gd"
 }, {
+"base": "Enemy",
+"class": "LavaBossProjectile",
+"language": "GDScript",
+"path": "res://actors/enemies/lava_boss/projectile/lava_boss_projectile.gd"
+}, {
 "base": "Camera2D",
 "class": "LinkedCamera",
 "language": "GDScript",
@@ -191,6 +196,7 @@ _global_script_class_icons={
 "LDtkLevel": "",
 "LDtkTileMap": "",
 "LDtkWorldData": "",
+"LavaBossProjectile": "",
 "LinkedCamera": "",
 "MapRoom": "",
 "Pickup": "",

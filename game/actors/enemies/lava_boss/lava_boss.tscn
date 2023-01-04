@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/lava_boss.png" type="Texture" id=1]
+[ext_resource path="res://general_purpose/effects/flash_tween.tscn" type="PackedScene" id=2]
+[ext_resource path="res://general_purpose/fsm/fsm_anim.gd" type="Script" id=3]
+[ext_resource path="res://actors/enemies/lava_boss/lava_boss.gd" type="Script" id=4]
+[ext_resource path="res://actors/enemies/lava_boss/lava_boss_enter.gd" type="Script" id=5]
+[ext_resource path="res://actors/enemies/lava_boss/lava_boss_idle.gd" type="Script" id=6]
+[ext_resource path="res://actors/enemies/lava_boss/lava_boss_fire_up.gd" type="Script" id=7]
+[ext_resource path="res://general_purpose/damage_areas/receive_damage_area.gd" type="Script" id=8]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 2.0
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/head:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 16, 176, 288, 128 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fire"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/head:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 16, 16, 288, 128 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotate/head:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 16, 176, 288, 128 ) ]
+}
+
+[node name="lava_boss" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="rotate" type="Node2D" parent="."]
+
+[node name="head" type="Sprite" parent="rotate"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+offset = Vector2( 52, -6 )
+region_enabled = true
+region_rect = Rect2( 16, 176, 288, 128 )
+
+[node name="flash_tween" parent="rotate/head" instance=ExtResource( 2 )]
+
+[node name="RcvDamageArea" type="Area2D" parent="rotate"]
+position = Vector2( 21, -9 )
+collision_layer = 0
+collision_mask = 1024
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rotate/RcvDamageArea"]
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="firepos" type="Position2D" parent="rotate"]
+position = Vector2( 35, 3 )
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/fire = SubResource( 2 )
+anims/idle = SubResource( 3 )
+script = ExtResource( 3 )
+
+[node name="states" type="Node" parent="."]
+
+[node name="enter" type="Node" parent="states"]
+script = ExtResource( 5 )
+
+[node name="idle" type="Node" parent="states"]
+script = ExtResource( 6 )
+
+[node name="spawn" type="Node" parent="states"]
+
+[node name="fire_up" type="Node" parent="states"]
+script = ExtResource( 7 )
+
+[node name="fire_side" type="Node" parent="states"]

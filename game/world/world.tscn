@@ -22,7 +22,7 @@ __meta__ = {
 }
 
 [node name="fake_player" type="Sprite" parent="."]
-position = Vector2( 1080, 528 )
+position = Vector2( -720, 512 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 hframes = 4

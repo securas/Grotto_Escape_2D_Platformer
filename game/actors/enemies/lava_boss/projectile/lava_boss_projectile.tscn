@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/tileset.png" type="Texture" id=1]
+[ext_resource path="res://actors/enemies/lava_boss/projectile/lava_boss_projectile.gd" type="Script" id=2]
+[ext_resource path="res://assets/circles_12.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[sub_resource type="CanvasItemMaterial" id=2]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.94902, 0.290196, 0.00784314, 1 )
+anim_speed = 1.0
+anim_speed_random = 0.36
+anim_offset = 0.13
+anim_offset_random = 0.51
+
+[node name="lava_boss_projectile" type="KinematicBody2D"]
+collision_layer = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="particles" type="Particles2D" parent="."]
+material = SubResource( 2 )
+speed_scale = 2.0
+local_coords = false
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
+
+[node name="projectile" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 224, 160, 11, 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="end_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="end_timer" to="." method="_on_end_timer_timeout" flags=3]

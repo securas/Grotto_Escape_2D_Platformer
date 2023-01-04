@@ -56,6 +56,7 @@ func _on_fadelayer_finished():
 
 func _on_player_leaving( worldpos : Vector2 ):
 	if not player_can_leave: return
+	if not world: return
 	var nxt_level = world.get_level_at( worldpos )
 	if not nxt_level: return
 #	game.state.just_died = false
